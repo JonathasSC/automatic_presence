@@ -5,9 +5,11 @@ from utils import *
 WEBCAM = 0
 COLOR = (0, 255, 0)
 
+
 def main():
     my_spreadsheet = Spreadsheet('src\spreadsheet.xlsx')
-    
+    my_spreadsheet.update_file()
+
     cam = cv2.VideoCapture(WEBCAM)
 
     sfr = SimpleFacerec()
@@ -27,7 +29,8 @@ def main():
             x2 = location[3]
 
             name_cord = (x2, y1 - 10)
-            cv2.putText(frame, img_name, name_cord, cv2.FONT_HERSHEY_PLAIN, 1, COLOR, 1)
+            cv2.putText(frame, img_name, name_cord,
+                        cv2.FONT_HERSHEY_PLAIN, 1, COLOR, 1)
             cv2.rectangle(frame, (x1, y1), (x2, y2), COLOR, 2)
 
             my_spreadsheet.be_presence(upper_img_name)
@@ -36,6 +39,8 @@ def main():
 
         if cv2.waitKey(5) == 27:
             break
+        else:
+            pass
 
     cam.release()
     cv2.destroyAllWindows()
